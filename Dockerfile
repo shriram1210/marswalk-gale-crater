@@ -9,7 +9,8 @@ WORKDIR /app
 COPY --from=unpack /source/application/requirements-lock.txt .
 RUN pip install --no-cache-dir -r requirements-lock.txt && useradd --uid 10001 --create-home marswalk
 COPY --from=unpack --chown=marswalk:marswalk /source/application/ .
-RUN python tools/build_dashboard.py && mkdir -p /app/state && chown marswalk:marswalk /app/state
+COPY --chown=marswalk:marswalk deployment_tuning.py .
+RUN python deployment_tuning.py && mkdir -p /app/state && chown marswalk:marswalk /app/state
 USER marswalk
 ENV PORT=10000 MARSWALK_STATE_DIR=/app/state
 EXPOSE 10000
