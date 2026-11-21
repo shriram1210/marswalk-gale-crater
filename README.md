@@ -17,6 +17,8 @@
   <a href="#-mission">Mission</a> ·
   <a href="#-inside-the-system">Features</a> ·
   <a href="#-technical-architecture">Architecture</a> ·
+  <a href="#data-flow-diagram">Data flow</a> ·
+  <a href="#logical-data-model">Data model</a> ·
   <a href="#-scientific-data">Datasets</a> ·
   <a href="#-run-marswalk">Run locally</a> ·
   <a href="#-verification--scope">Verification</a> ·
@@ -47,6 +49,31 @@
 | 🗺️ 01 — MAP | 🧭 02 — PLAN | 🛡️ 03 — SURVIVE |
 |:--|:--|:--|
 | Inspect local terrain, elevation, derived slope, science locations and source metadata. | Choose a hypothetical base and stops; compare routes and compute the return journey. | Review the time budget, exclusions, historical science context and labelled what-if scenarios. |
+
+---
+
+## 🧭 Explore MARSWALK your way
+
+Pick an area to investigate — these links stay inside this README.
+
+| 🛰️ Understand the science | 🧩 Explore engineering | 🚀 Try the project |
+|:--|:--|:--|
+| [NASA datasets](#-scientific-data) · [Data model](#logical-data-model) | [Architecture](#️-technical-architecture) · [Data flow](#data-flow-diagram) | [Run with Docker](#️-run-marswalk) · [API](#-api-at-a-glance) |
+
+<details>
+<summary><strong>▶ Open a sample Marswalk mission — seven steps</strong></summary>
+
+1. Inspect the local **Yellowknife Bay** terrain and verify its coverage.
+2. Choose a **hypothetical staging point** and science stops.
+3. Set mobility assumptions: walking speed, slope limit and reserve.
+4. Ask FastAPI for **Shortest Distance** and **Lower Terrain Cost**.
+5. Compare profiles, route length and sampled slope.
+6. Check the independent return leg and time budget.
+7. Export the plan with source information and limitations.
+
+This is an illustrative visitor walkthrough; operational astronaut safety is **not** certified.
+
+</details>
 
 ---
 
@@ -100,16 +127,26 @@ This illustration is the **conceptual architecture**; counts of fully integrated
 
 ### Data-flow diagram
 
-```mermaid
-flowchart LR
-  A["NASA archives & source records"] --> B["Product labels, checksums & Mars coordinates"]
-  B --> C["Prepared raster grids, masks & science catalogue"]
-  C --> D["FastAPI terrain and route services"]
-  D <--> E["Browser map, 3D viewer & mission controls"]
-  E --> F["Route metrics, profiles & mission exports"]
-  classDef core fill:#1c3530,stroke:#74b3a0,color:#f1f7f4,stroke-width:1.5px;
-  class A,B,C,D,E,F core;
-```
+<p align="center">
+  <a href="docs/assets/data-flow.svg" title="Open the full-size data-flow diagram">
+    <img src="docs/assets/data-flow.svg" alt="Data-flow diagram: NASA source products, verified preprocessing, FastAPI backend, frontend mission explorer and mission outputs" width="100%" />
+  </a>
+</p>
+
+<details>
+<summary><strong>🔎 Explore the data flow step by step</strong></summary>
+
+1. **NASA source records:** collect product identities, observation dates, footprints and credits.
+2. **Verify and prepare:** preserve Mars-specific map coordinates, masks, units and checksums.
+3. **Calculate:** FastAPI serves terrain/science data and computes shortest-distance and lower-terrain-cost routes, including the return leg.
+4. **Interact:** the browser displays only supported map layers and allows hypothetical base and science-stop selection.
+5. **Explain and export:** deliver route metrics, source references, assumptions and uncertainty notes.
+
+**Important:** Generated global terrain and scenario scores are separate from the locally measured HiRISE terrain.
+
+</details>
+
+[Open the full-size data-flow diagram](docs/assets/data-flow.svg)
 
 ### Main engineering components
 
@@ -160,16 +197,26 @@ The exact current implementation is available after restoring the repository's a
 
 ### Logical data model
 
-```mermaid
-erDiagram
-  STUDY_AREA ||--o{ DATA_LAYER : contains
-  DATA_LAYER }o--o{ SOURCE_PRODUCT : cites
-  STUDY_AREA ||--o{ SCIENCE_STOP : references
-  STUDY_AREA ||--o{ MISSION_PLAN : supports
-  MISSION_PLAN ||--o{ ROUTE_LEG : includes
-  MISSION_PLAN }o--o{ SCIENCE_STOP : visits
-  SOURCE_PRODUCT ||--o{ ENV_OBSERVATION : records
-```
+<p align="center">
+  <a href="docs/assets/data-model.svg" title="Open the full-size logical data model">
+    <img src="docs/assets/data-model.svg" alt="Conceptual MARSWALK data model linking study areas, data layers, source products, science stops, mission plans, route legs and historical environmental observations" width="100%" />
+  </a>
+</p>
+
+<details>
+<summary><strong>🔎 Explore the record relationships</strong></summary>
+
+- A **StudyArea** contains multiple **DataLayers**, references **ScienceStops**, and supports user-created **MissionPlans**.
+- A **DataLayer** cites one or more **SourceProducts** with instrument identity and provenance.
+- A **MissionPlan** selects science stops and contains route legs for travel and return.
+- A **SourceProduct** can support historical **EnvObservations** with dates, measurements, units and quality flags.
+- A location marked *reference only* is **not** automatically a precisely registered waypoint.
+
+The diagram is a conceptual data model, **not** a claim that all entities are stored in a production database.
+
+</details>
+
+[Open the full-size data-model diagram](docs/assets/data-model.svg)
 
 | Record | Typical fields |
 |:--|:--|
