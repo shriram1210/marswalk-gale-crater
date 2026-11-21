@@ -58,7 +58,7 @@ Pick an area to investigate — these links stay inside this README.
 
 | 🛰️ Understand the science | 🧩 Explore engineering | 🚀 Try the project |
 |:--|:--|:--|
-| [NASA datasets](#-scientific-data) · [Data model](#logical-data-model) | [Architecture](#️-technical-architecture) · [Data flow](#data-flow-diagram) | [Run with Docker](#️-run-marswalk) · [API](#-api-at-a-glance) |
+| [NASA datasets](#-scientific-data) · [Data model](#logical-data-model) | [Architecture](#-technical-architecture) · [Data flow](#data-flow-diagram) | [Run with Docker](#-run-marswalk) · [API](#-api-at-a-glance) |
 
 <details>
 <summary><strong>▶ Open a sample Marswalk mission — seven steps</strong></summary>
