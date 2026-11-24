@@ -14,6 +14,14 @@
 </p>
 
 <p align="center">
+  <a href="https://marswalk-gale-crater.onrender.com/"><strong>🌐 OPEN LIVE MARSWALK WEBSITE</strong></a>
+  &nbsp; · &nbsp;
+  <a href="https://marswalk-gale-crater.onrender.com/api/health">Backend API Status</a>
+</p>
+
+<p align="center"><sub>Previously reported Render deployment URL. Current uptime has not been independently verified.</sub></p>
+
+<p align="center">
   <a href="#-mission">Mission</a> ·
   <a href="#-inside-the-system">Features</a> ·
   <a href="#-technical-architecture">Architecture</a> ·
@@ -326,7 +334,10 @@ The current repo packaging works for deployment, but moving **reviewable source 
 
 The included Dockerfile is suitable for a Docker-capable host such as **Render**. Provision a web service from the repository, select Docker, and confirm the deployed `/api/health`, `/docs` and mission workflow using the **public** URL. Free services can cold-start and ephemeral files may be discarded on restart, so downloadable mission exports are preferred for a demo.
 
-**No public demo URL is claimed here until it has been verified.**
+**Live website:** [Open MARSWALK — Gale Crater](https://marswalk-gale-crater.onrender.com/)  
+**Public API status:** [Health endpoint](https://marswalk-gale-crater.onrender.com/api/health)  
+
+The public address was previously reported as deployed. Its current uptime and end-to-end functionality have **not been independently rechecked** for this README update. No Render account settings were changed.
 
 ---
 
@@ -382,7 +393,7 @@ This matrix describes **project goals and evidence**, not an official NASA score
 - [ ] Validate historical REMS/RAD records with original source tables, times and quality flags.
 - [ ] Improve explicit data-source provenance and unavailable-state coverage across all panels.
 - [ ] Move from packaged transport source to a conventional reviewable Git repository layout.
-- [ ] Add a verified live demo URL, performance results and a concise demonstration recording.
+- [ ] Recheck the published demo URL, record hosting performance results and add a concise demonstration recording.
 
 ---
 
