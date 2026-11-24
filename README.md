@@ -400,7 +400,7 @@ This matrix describes **project goals and evidence**, not an official NASA score
 ## 👩‍🚀 Team STRATUS
 
 **Designed by Flight Dynamics — Team STRATUS**  
-K Shriram · Deepthi · Manya
+K Shriram · Manya . Deepti
 
 The project and diagrams were developed for **NASA Space Apps Challenge 2026**. Cover, mission-story, original architecture and preview visuals are drawn from the team-supplied `STRATUS-MARSGAIT` presentation. An original lightweight system-flow diagram is also included in `docs/assets/`.
 
